@@ -59,8 +59,8 @@ public class ShootScript : MonoBehaviour
         }
         else if (aiming && !shoot)
         {
-            //shoot
             aiming = false;
+            StartCoroutine(Shoot());
             HideDots();
         }
     }
@@ -106,5 +106,19 @@ public class ShootScript : MonoBehaviour
         Vector2 dir = GameObject.Find("dot (1)").transform.position - transform.position;
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+    }
+
+    IEnumerator Shoot()
+    {
+        for (int i = 0; i < 5; i++)
+        {
+
+            yield return new WaitForSeconds(0.07f);
+            GameObject ball = Instantiate(ballPrefab, transform.position, Quaternion.identity);
+            ball.name = "Ball";
+            ball.transform.SetParent(ballContainer.transform);
+            ballbody = ball.GetComponent<Rigidbody2D>();
+            ballbody.AddForce(ShootForce(Input.mousePosition));
+        }
     }
 }
