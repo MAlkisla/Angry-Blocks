@@ -5,8 +5,9 @@ using UnityEngine;
 
 public class ShootScript : MonoBehaviour
 {
+    private GameController gameController;
     public float power = 2;
-    //private int dot = 15;
+    private int dot = 15;
 
     private Vector2 startPos;
 
@@ -19,9 +20,15 @@ public class ShootScript : MonoBehaviour
 
     public GameObject ballPrefab;
     public GameObject ballContainer;
+
+    private void Awake()
+    {
+        gameController = GameObject.Find("GameController").GetComponent<GameController>();
+        Dots = GameObject.Find("Dots");
+
+    }
     void Start()
     {
-        Dots = GameObject.Find("Dots");
         projectilesPath = Dots.transform.Cast<Transform>().ToList().ConvertAll(t => t.gameObject);
         HideDots();
     }
@@ -29,13 +36,11 @@ public class ShootScript : MonoBehaviour
     void Update()
     {
         ballbody = ballPrefab.GetComponent<Rigidbody2D>();
-        //if (gc.shotCount <= 3 && !IsMouseOverUI())
-        //{
-        //    Aim();
-        //    Rotate();
-        //}
-        Aim();
-        Rotate();
+        if (gameController.shotCount <= 3)
+        {
+            Aim();
+            Rotate();
+        }
     }
 
     void Aim()
@@ -62,7 +67,10 @@ public class ShootScript : MonoBehaviour
             aiming = false;
             HideDots();
             StartCoroutine(Shoot());
-            Camera.main.GetComponent<CameraTransition>().RotateCameraToSide();
+            if (gameController.shotCount == 1)
+            {
+                Camera.main.GetComponent<CameraTransition>().RotateCameraToSide();
+            }
         }
     }
 
@@ -121,5 +129,7 @@ public class ShootScript : MonoBehaviour
             ballbody = ball.GetComponent<Rigidbody2D>();
             ballbody.AddForce(ShootForce(Input.mousePosition));
         }
+
+        gameController.shotCount++;
     }
 }
