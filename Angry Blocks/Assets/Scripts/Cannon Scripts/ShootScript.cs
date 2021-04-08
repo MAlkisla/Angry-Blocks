@@ -60,8 +60,9 @@ public class ShootScript : MonoBehaviour
         else if (aiming && !shoot)
         {
             aiming = false;
-            StartCoroutine(Shoot());
             HideDots();
+            StartCoroutine(Shoot());
+            Camera.main.GetComponent<CameraTransition>().RotateCameraToSide();
         }
     }
 
