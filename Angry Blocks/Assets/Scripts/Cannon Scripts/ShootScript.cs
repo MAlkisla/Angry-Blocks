@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ShootScript : MonoBehaviour
 {
     private GameController gameController;
+
     public float power = 2;
-    private int dot = 15;
+    //private int dot = 15;
 
     private Vector2 startPos;
 
@@ -21,7 +23,8 @@ public class ShootScript : MonoBehaviour
     public GameObject ballPrefab;
     public GameObject ballContainer;
 
-    private void Awake()
+
+    void Awake()
     {
         gameController = GameObject.Find("GameController").GetComponent<GameController>();
         Dots = GameObject.Find("Dots");
@@ -55,6 +58,7 @@ public class ShootScript : MonoBehaviour
                 //cal
                 aiming = true;
                 startPos = Input.mousePosition;
+                gameController.CheckShotCount();
             }
             else
             {
@@ -119,7 +123,7 @@ public class ShootScript : MonoBehaviour
 
     IEnumerator Shoot()
     {
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < gameController.ballsCount; i++)
         {
 
             yield return new WaitForSeconds(0.07f);
@@ -128,8 +132,13 @@ public class ShootScript : MonoBehaviour
             ball.transform.SetParent(ballContainer.transform);
             ballbody = ball.GetComponent<Rigidbody2D>();
             ballbody.AddForce(ShootForce(Input.mousePosition));
+
+            int balls = gameController.ballsCount - i;
+            gameController.ballsCountText.text = (balls - 1).ToString();
         }
 
+        yield return new WaitForSeconds(0.5f);
         gameController.shotCount++;
+        gameController.ballsCountText.text = gameController.ballsCount.ToString();
     }
 }

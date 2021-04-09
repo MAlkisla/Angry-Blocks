@@ -307,6 +307,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f350d6674f9847849a2e21fa581259a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  countText: {fileID: 24155}
 --- !u!50 &18621
 Rigidbody2D:
   serializedVersion: 4
@@ -791,6 +792,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f350d6674f9847849a2e21fa581259a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  countText: {fileID: 22660}
 --- !u!1 &2359
 GameObject:
   m_ObjectHideFlags: 0
@@ -1281,6 +1283,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f350d6674f9847849a2e21fa581259a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  countText: {fileID: 22950}
 --- !u!1 &4007
 GameObject:
   m_ObjectHideFlags: 0
@@ -1375,6 +1378,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f350d6674f9847849a2e21fa581259a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  countText: {fileID: 21164}
 --- !u!1 &5350
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,13 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Block : MonoBehaviour
 {
     private int count;
+
+    public Text countText;
     void Start()
     {
-
     }
 
     // Update is called once per frame
@@ -22,6 +24,7 @@ public class Block : MonoBehaviour
     public void SetStartingCount(int count)
     {
         this.count = count;
+        countText.text = count.ToString();
     }
 
     private void OnCollisionEnter2D(Collision2D target)
@@ -30,6 +33,8 @@ public class Block : MonoBehaviour
         {
             count--;
             Camera.main.GetComponent<CameraTransition>().Shake();
+
+            countText.text = count.ToString();
 
             if (count == 0)
             {
