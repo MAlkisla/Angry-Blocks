@@ -40,6 +40,7 @@ public class Block : MonoBehaviour
             {
                 Destroy(gameObject);
                 Camera.main.GetComponent<CameraTransition>().MediumShake();
+                GameObject.Find("ExtraBallProgress").GetComponent<Progress>().IncreaseCurrentWidth();
             }
         }
     }
