@@ -15,7 +15,7 @@ public class GameController : MonoBehaviour
 
     public GameObject[] block;
 
-    public ShotCountText shotCountText;
+    private ShotCountText shotCountText;
     
     public int shotCount;
     public int ballsCount;
@@ -23,6 +23,7 @@ public class GameController : MonoBehaviour
     public Text ballsCountText;
 
     private GameObject ballsContainer;
+    public GameObject gameOver;
 
     void Awake()
     {
@@ -46,7 +47,7 @@ public class GameController : MonoBehaviour
     {
         if (ballsContainer.transform.childCount == 0 && shotCount == 4)
         {
-            print("GameOver");
+            gameOver.SetActive(true);
             GameObject.Find("Cannon").GetComponent<Animator>().SetBool("MoveIn", false);
         }
         CheckBlocks();

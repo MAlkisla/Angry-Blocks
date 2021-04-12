@@ -8,8 +8,11 @@ public class Block : MonoBehaviour
     private int count;
 
     public Text countText;
-    void Start()
+
+    private AudioSource bounceSound;
+    void Awake()
     {
+        bounceSound = GameObject.Find("BounceSound").GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -35,6 +38,8 @@ public class Block : MonoBehaviour
             Camera.main.GetComponent<CameraTransition>().Shake();
 
             countText.text = count.ToString();
+
+            bounceSound.Play();
 
             if (count == 0)
             {
