@@ -20,10 +20,14 @@ public class GameController : MonoBehaviour
     public int shotCount;
     public int ballsCount;
 
+    public int score;
+
     public Text ballsCountText;
 
     private GameObject ballsContainer;
     public GameObject gameOver;
+
+    private bool firstShot;
 
     void Awake()
     {
@@ -34,7 +38,6 @@ public class GameController : MonoBehaviour
 
     void Start()
     {
-        PlayerPrefs.DeleteKey("Level");
         ballsCount = PlayerPrefs.GetInt("BallsCount", 5);
         ballsCountText.text = ballsCount.ToString();
         Physics2D.gravity = new Vector2(0, -17);
@@ -50,6 +53,12 @@ public class GameController : MonoBehaviour
             gameOver.SetActive(true);
             GameObject.Find("Cannon").GetComponent<Animator>().SetBool("MoveIn", false);
         }
+
+        if (shotCount>2)
+            firstShot = false;
+        else
+            firstShot = true;
+
         CheckBlocks();
     }
 
@@ -130,6 +139,14 @@ public class GameController : MonoBehaviour
             RemoveBalls();
             PlayerPrefs.SetInt("Level", PlayerPrefs.GetInt("Level") + 1);
             SpawnLevel();
+
+            //if (ballsCount >= PlayerPrefs.GetInt("BallsCount", 5))
+            //    PlayerPrefs.SetInt("BallsCount", ballsCount);
+
+            if (firstShot)
+                score += 5;
+            else
+                score += 3;
         }
     }
 

@@ -7,20 +7,30 @@ using UnityEngine.UI;
 public class MainMenu : MonoBehaviour
 {
     public GameObject pauseMenu;
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
+    public Text scoreText;
+    public Text bestScoreText;
+
+    private GameController gameController;
+    private void Awake()
+    {
+        gameController = GameObject.Find("GameController").GetComponent<GameController>();
+    }
     void Update()
     {
-        
+        scoreText.text = gameController.score.ToString();
+
+        if (gameController.score > PlayerPrefs.GetInt("BestScore",0))
+        {
+            PlayerPrefs.SetInt("BestScore", gameController.score);
+        }
+        bestScoreText.text = "Best  " + PlayerPrefs.GetInt("BestScore");
     }
 
     public void TryAgain()
     {
         Time.timeScale = 1;
+        //PlayerPrefs.DeleteAll();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
