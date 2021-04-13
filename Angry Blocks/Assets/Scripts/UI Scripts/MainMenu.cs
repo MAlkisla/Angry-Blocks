@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public GameObject pauseMenu;
     void Start()
     {
         
@@ -22,5 +22,17 @@ public class MainMenu : MonoBehaviour
     {
         Time.timeScale = 1;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void Pause()
+    {
+        Time.timeScale = 0;
+        pauseMenu.gameObject.SetActive(true);
+    }
+
+    public void UnPause()
+    {
+        Time.timeScale = 1;
+        pauseMenu.gameObject.SetActive(false);
     }
 }
