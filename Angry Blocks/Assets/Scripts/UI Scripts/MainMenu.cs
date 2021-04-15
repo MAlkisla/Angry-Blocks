@@ -30,8 +30,9 @@ public class MainMenu : MonoBehaviour
     public void TryAgain()
     {
         Time.timeScale = 1;
-        //PlayerPrefs.DeleteAll();
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        PlayerPrefs.DeleteAll();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); //or
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     public void Pause()
